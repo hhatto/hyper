@@ -280,7 +280,7 @@ fn prepare_headers(mut headers: Headers) -> Vec<Http2Header> {
         warn!("The `Connection` header is not valid for an HTTP/2 connection.");
     }
     let mut http2_headers: Vec<_> = headers.iter().filter_map(|h| {
-        if h.is::<header::SetCookie>() {
+        if h.is::<header::SetCookie>() || h.is::<header::Host>() {
             None
         } else {
             // HTTP/2 header names MUST be lowercase.
